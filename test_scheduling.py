@@ -7,8 +7,8 @@ from scheduling import determine_meeting_length, determine_meeting_participants,
 # Example Agent class for testing
 def create_test_agent(id, depth=0, expansiveness=0, proclivity=0):
     calendar={
-            'Monday': [(30 * i, None) for i in range(16)],  # 8-hour workday
-            'Tuesday': [(30 * i, None) for i in range(16)],
+            'Monday': [[30 * i, None] for i in range(16)],  # 8-hour workday
+            'Tuesday': [[30 * i, None] for i in range(16)],
         }
     
     return Agent(id=id, meeting_depth=depth, meeting_expansiveness=expansiveness, meeting_proclivity=proclivity, pay=10000, calendar=calendar)

@@ -9,7 +9,7 @@ from agent import Agent
 def generate_potential_meetings(agents):
     total_proclivity = sum(agent.meeting_proclivity for agent in agents)
     meetings_to_schedule = [
-        (agent, max(1, round((agent.meeting_proclivity / total_proclivity) * (len(agents)*(Agent.HOURS_IN_WORKDAY/Meeting.MIN_MEETING_LENGTH)))))
+        (agent, max(1, round((agent.meeting_proclivity / total_proclivity) * (len(agents)*(Agent.HOURS_IN_WORKDAY/Meeting.MIN_MEETING_LENGTH_IN_HOURS)))))
         for agent in agents
     ]
 
@@ -67,7 +67,7 @@ def schedule_meetings(agents):
         day_slots = scheduler.calendar[day]
 
         # Calculate the number of slots needed for the meeting
-        slots_needed = length // meeting.MIN_MEETING_LENGTH
+        slots_needed = length // meeting.MIN_MEETING_LENGTH_IN_MINUTES
 
         # Ensure that the meeting can fit within the day's available slots
         available_slots = [

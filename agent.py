@@ -27,7 +27,7 @@ class Agent:
         for day in range(1):  # Monday to Friday TODO: Change this back to a week
             day_slots = []
             current_time = work_start + timedelta(days=day)
-            for _ in range(int(self.HOURS_IN_WORKDAY*60/Meeting.MIN_MEETING_LENGTH)):  # 8 working hours divided into 30-minute blocks
+            for _ in range(int(self.HOURS_IN_WORKDAY*60/Meeting.MIN_MEETING_LENGTH_IN_MINUTES)):  # 8 working hours divided into 30-minute blocks
                 day_slots.append([current_time, None])  # None means free slot
                 current_time += timedelta(minutes=30)
             calendar[work_start + timedelta(days=day)] = day_slots

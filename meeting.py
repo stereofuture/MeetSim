@@ -2,7 +2,9 @@ import uuid
 
 class Meeting:
 
-    MIN_MEETING_LENGTH = 30
+    #TODO: Settle on minutes or hours 
+    MIN_MEETING_LENGTH_IN_MINUTES = 30
+    MIN_MEETING_LENGTH_IN_HOURS = 0.5
     MAX_MEETING_LENGTH = 120
 
     def __init__(self, scheduler, duration, participants):

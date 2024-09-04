@@ -67,7 +67,7 @@ def schedule_meetings(agents):
         day_slots = scheduler.calendar[day]
 
         # Calculate the number of slots needed for the meeting
-        slots_needed = length // meeting.MIN_MEETING_LENGTH_IN_MINUTES
+        slots_needed = length // Meeting.MIN_MEETING_LENGTH_IN_MINUTES
 
         # Ensure that the meeting can fit within the day's available slots
         available_slots = [

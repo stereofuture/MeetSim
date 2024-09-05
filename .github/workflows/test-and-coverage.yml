@@ -1,0 +1,52 @@
+name: Run Tests and Coverage
+
+permissions:
+  pull-requests: write
+
+on:
+  pull_request:
+    branches:
+      - main  # Or your default branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'  # Use the Python version that your project requires
+
+    - name: Install dependencies
+      run: |
+        python -m venv .venv
+        source .venv/bin/activate
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests with pytest and collect coverage
+      run: |
+        source .venv/bin/activate
+        pytest --cov=. --cov-report=xml --cov-report=term-missing
+
+    - name: Upload coverage to GitHub Actions
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: coverage.xml
+
+    - name: Pytest coverage comment
+      uses: MishaKav/pytest-coverage-comment@main
+      with:
+        pytest-xml-coverage-path: ./coverage.xml
+
+    - name: Archive coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-xml
+        path: coverage.xml
+
